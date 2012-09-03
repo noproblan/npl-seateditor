@@ -23,7 +23,11 @@
 		margin: 2px;
 		float: left;
 	  }
-	  #info-container {
+	  #info-container { // with selection hack
+		-ms-user-select: none;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-khtml-user-select: none;
 		padding: 20px;
 		clear: both;
 	  }
