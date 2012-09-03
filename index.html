@@ -84,13 +84,7 @@
 			group.add(leftSeat);
 			var rightSeat = createSeat(120, 23);
 			group.add(rightSeat);
-			
-			group.on("dblclick", function(e) {
-				var newDesk = createDesk(this.getX() + 50, this.getY() + 30, 0);
-				this.getParent().add(newDesk);
-				this.getParent().draw();
-			});
-			
+
 			group.on("click dragstart", function(e) {
 				selectedDesk.set(this);
 			});
@@ -137,6 +131,19 @@
 			}
 		});
 
+		// New Desk Creation
+		document.getElementById('canvas-container').ondblclick = function(e) {
+			var refDesk = selectedDesk.get();
+			var x = refDesk ? refDesk.getX() + 50 : 5;
+			var y = refDesk ? refDesk.getY() + 30 : 5;
+			var rotation = refDesk ? refDesk.getRotationDeg() : 0;
+			var newDesk = createDesk(x, y, rotation);
+			deskLayer.add(newDesk);
+			deskLayer.draw();
+			selectedDesk.set(newDesk);
+		};
+		
+		// Desk Movement
 		window.onkeydown = function(e) {
 			var key = {w: 87, a: 65, s: 83, d: 68, q: 81, e: 69};
 			switch (e.keyCode) { // check, ob mich die gedrückte Taste was angeht
@@ -205,14 +212,6 @@
 			selectedDesk.get().setRotationDeg(parseFloat(this.value));
 			selectedDesk.get().getParent().draw();
 		}
-		
-		
-		
-		var desk1 = createDesk(20, 20, 0);
-		deskLayer.add(desk1);
-		deskLayer.draw();
-		
-		
       };
 
     </script>
