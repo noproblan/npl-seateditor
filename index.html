@@ -102,12 +102,11 @@
 			document.getElementById('current-index').value = desk.index;
 			document.getElementById('current-x').value = desk.getPosition().x;
 			document.getElementById('current-y').value = desk.getPosition().y;
-			document.getElementById('current-rotation').value = desk.getRotation();
+			document.getElementById('current-rotation').value = desk.getRotationDeg();
 		}
 		
 		var updateDeskList = function(kineticsLayer) {
 			var oldValue = $('#desklist').val();
-			console.log(oldValue);
 			$('#desklist').empty();
 			$.each(kineticsLayer.getChildren(), function(index, value) {
 			  document.getElementById('desklist').innerHTML += '<option value="'+index+'">'+index+'</option>';
@@ -128,7 +127,7 @@
 		stage.add(deskLayer);
 		stage.setScale(0.5);
 		
-		/* EVENTS */
+		/* EVENTS *******************************************************************/
 		stage.on("click dragend", function(e) {
 			updateDeskList(deskLayer);
 			var currentDesk = selectedDesk.get();
@@ -137,6 +136,50 @@
 				updatePropertyList(currentDesk);
 			}
 		});
+
+		window.onkeydown = function(e) {
+			var key = {w: 87, a: 65, s: 83, d: 68, q: 81, e: 69};
+			switch (e.keyCode) { // check, ob mich die gedrückte Taste was angeht
+				case key.w: // nach oben
+				case key.a: // nach links
+				case key.s: // nach unten
+				case key.d: // nach rechts
+				case key.q: // drehen im Gegenuhrzeigersinn
+				case key.e: // drehen im Uhrzeigersinn
+					var desk = selectedDesk.get();
+					if (desk) {
+						switch(e.keyCode) {
+							case key.w:
+								var y = Math.round(desk.getPosition().y/10)*10
+								desk.setY(y-10);
+							break;
+							case key.a:
+								var x = Math.round(desk.getPosition().x/10)*10
+								desk.setX(x-10);
+							break;
+							case key.s:
+								var y = Math.round(desk.getPosition().y/10)*10
+								desk.setY(y+10);
+							break;
+							case key.d:
+								var x = Math.round(desk.getPosition().x/10)*10
+								desk.setX(x+10);
+							break;
+							case key.q:
+								var rot = Math.round(desk.getRotationDeg()/10)*10
+								desk.setRotationDeg((rot-10)%360);
+							break;
+							case key.e:
+								var rot = Math.round(desk.getRotationDeg()/10)*10
+								desk.setRotationDeg((rot+10)%360);
+							break;
+						}
+						updatePropertyList(desk);
+						desk.getParent().draw();
+					}
+				break;
+			}
+		}
 		
 		document.getElementById('desklist').onchange = function() {
 			var oldDesk = selectedDesk.get();
@@ -147,6 +190,21 @@
 				updatePropertyList(newDesk);
 			}
 		};
+		
+		document.getElementById('current-x').onchange = function() {
+			selectedDesk.get().setX(parseInt(this.value));
+			selectedDesk.get().getParent().draw();
+		}
+
+		document.getElementById('current-y').onchange = function() {
+			selectedDesk.get().setY(parseInt(this.value));
+			selectedDesk.get().getParent().draw();
+		}
+
+		document.getElementById('current-rotation').onchange = function() {
+			selectedDesk.get().setRotationDeg(parseFloat(this.value));
+			selectedDesk.get().getParent().draw();
+		}
 		
 		
 		
