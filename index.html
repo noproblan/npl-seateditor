@@ -5,6 +5,7 @@
       body {
         margin: 0;
         padding: 3px;
+		font-family: Verdana, sans-serif;
       }
       canvas {
         border: 1px solid #9C9898;
@@ -21,6 +22,13 @@
 	  #canvas-container {
 		margin: 2px;
 		float: left;
+	  }
+	  #info-container {
+		padding: 20px;
+		clear: both;
+	  }
+	  #init-controls button {
+		width: 100%;
 	  }
     </style>
 	
@@ -89,6 +97,13 @@
 				selectedDesk.set(this);
 			});
 			
+			// Desk kopieren
+			group.on("dblclick", function(e) {
+				var newDesk = createDesk(this.getX() + 50,this.getY() + 30,this.getRotationDeg());
+				this.getParent().add(newDesk);
+				selectedDesk.set(newDesk);
+			});
+			
 			return group;
 		}
 
@@ -104,7 +119,6 @@
 			$('#desklist').empty();
 			$.each(kineticsLayer.getChildren(), function(index, value) {
 			  document.getElementById('desklist').innerHTML += '<option value="'+index+'">'+index+'</option>';
-			  //$('#desklist').append('<option value="'+index+'">'+index+'</option>');
 			});
 			if (oldValue !== null) {
 				$('#desklist').val(oldValue);
@@ -131,18 +145,6 @@
 			}
 		});
 
-		// New Desk Creation
-		document.getElementById('canvas-container').ondblclick = function(e) {
-			var refDesk = selectedDesk.get();
-			var x = refDesk ? refDesk.getX() + 50 : 5;
-			var y = refDesk ? refDesk.getY() + 30 : 5;
-			var rotation = refDesk ? refDesk.getRotationDeg() : 0;
-			var newDesk = createDesk(x, y, rotation);
-			deskLayer.add(newDesk);
-			deskLayer.draw();
-			selectedDesk.set(newDesk);
-		};
-		
 		// Desk Movement
 		window.onkeydown = function(e) {
 			var key = {w: 87, a: 65, s: 83, d: 68, q: 81, e: 69};
@@ -199,27 +201,50 @@
 		};
 		
 		document.getElementById('current-x').onchange = function() {
-			selectedDesk.get().setX(parseInt(this.value));
-			selectedDesk.get().getParent().draw();
+			var desk = selectedDesk.get();
+			if (desk) {
+				desk.setX(parseInt(this.value));
+				desk.getParent().draw();
+			}
 		}
-
 		document.getElementById('current-y').onchange = function() {
-			selectedDesk.get().setY(parseInt(this.value));
-			selectedDesk.get().getParent().draw();
+			var desk = selectedDesk.get();
+			if (desk) {
+				desk.setY(parseInt(this.value));
+				desk.getParent().draw();
+			}
 		}
-
 		document.getElementById('current-rotation').onchange = function() {
-			selectedDesk.get().setRotationDeg(parseFloat(this.value));
-			selectedDesk.get().getParent().draw();
+			var desk = selectedDesk.get();
+			if (desk) {
+				desk.setRotationDeg(parseFloat(this.value));
+				desk.getParent().draw();
+			}
 		}
+		
+		document.getElementById('add-2-button').onclick = function() {
+			var desk = createDesk(5,5,0);
+			deskLayer.add(desk);
+			deskLayer.draw();
+		};
+		document.getElementById('add-1-button').onclick = function() {
+			var desk = createDesk(5,5,0);
+			deskLayer.add(desk);
+			deskLayer.draw();
+		};
       };
 
     </script>
   </head>
   <body>
     <div id="menu-container">
+		<div id="init-controls">
+			<button id="add-2-button" name="add2Desk" type="button">+ 2er Tisch</button><br/>
+			<button id="add-1-button" name="add1Desk" type="button">+ 1er Tisch</button>
+		</div>
+		
 		<div id="desklist-container">
-			<select id="desklist" size="23">
+			<select id="desklist" size="19">
 			</select>
 		</div>
 		
@@ -245,7 +270,13 @@
 		</div>
 	</div>
 
-    <div id="canvas-container"></div>
+	<div id="canvas-container"></div>
+	
+	<div id="info-container">
+		<p>- Use w,a,s,d for movement and q,e for rotation.</p>
+		<p>- Double click on the canvas to create a new desk.</p>
+	</div>
+
   </body>
 </html>
 
