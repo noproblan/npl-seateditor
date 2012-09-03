@@ -98,18 +98,20 @@
 			return group;
 		}
 
-		var showProperties = function(desk) {
-			$("#current-index").val(desk.index);
-			$("#current-x").val(desk.getPosition().x);
-			$("#current-y").val(desk.getPosition().y);
+		var updatePropertyList = function(desk) {
+			document.getElementById('current-index').value = desk.index;
+			document.getElementById('current-x').value = desk.getPosition().x;
+			document.getElementById('current-y').value = desk.getPosition().y;
+			document.getElementById('current-rotation').value = desk.getRotation();
 		}
 		
 		var updateDeskList = function(kineticsLayer) {
 			var oldValue = $('#desklist').val();
 			console.log(oldValue);
 			$('#desklist').empty();
-			$.each(kineticsLayer.getChildren(), function(index, value) { 
-			  $('#desklist').append('<option value="'+index+'">'+index+'</option>');
+			$.each(kineticsLayer.getChildren(), function(index, value) {
+			  document.getElementById('desklist').innerHTML += '<option value="'+index+'">'+index+'</option>';
+			  //$('#desklist').append('<option value="'+index+'">'+index+'</option>');
 			});
 			if (oldValue !== null) {
 				$('#desklist').val(oldValue);
@@ -131,20 +133,21 @@
 			updateDeskList(deskLayer);
 			var currentDesk = selectedDesk.get();
 			if (currentDesk) {
-				$('#desklist').val(currentDesk.index);
-				showProperties(currentDesk);
+				document.getElementById('desklist').options[currentDesk.index].selected = true;
+				updatePropertyList(currentDesk);
 			}
 		});
 		
-		$('#desklist').change(function() {
+		document.getElementById('desklist').onchange = function() {
 			var oldDesk = selectedDesk.get();
 			if (oldDesk) {
 				var index = parseInt($(this).val());
 				var newDesk = oldDesk.getParent().getChildren()[index];
 				selectedDesk.set(newDesk);
-				showProperties(newDesk);
+				updatePropertyList(newDesk);
 			}
-		});
+		};
+		
 		
 		
 		var desk1 = createDesk(20, 20, 0);
@@ -176,6 +179,10 @@
 				<tr>
 					<td>Y: </td>
 					<td><input id="current-y" name="current-y" type="text"/></td>
+				</tr>
+				<tr>
+					<td>Rot: </td>
+					<td><input id="current-rotation" name="current-rotation" type="text"/></td>
 				</tr>
 			</table>
 		</div>
