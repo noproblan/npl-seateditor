@@ -3,4 +3,6 @@ npl-seateditor
 
 HTML5 Canvas Seat-Editor for noprobLAN LAN-Party-Hall.
 
-Not ready for use. I've to correct some things first.
+I just took the currently running version from the npl website. It still has many bugs.
+
+![Alt text](screenshot.png?raw=true "Application Screenshot")
