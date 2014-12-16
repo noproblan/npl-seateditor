@@ -1,38 +1,38 @@
 body {
-	margin: 0;
-	padding: 3px;
-	font-family: Verdana, sans-serif;
+    margin: 0;
+    padding: 3px;
+    font-family: Verdana, sans-serif;
 }
 
 canvas {
-	border: 1px solid #9C9898;
+    border: 1px solid #9C9898;
 }
 
 #menu-container {
-	float: left;
+    float: left;
 }
 
 #menu-container input {
-	width: 60px;
+    width: 60px;
 }
 
 #menu-container select {
-	width: 100%;
+    width: 100%;
 }
 
 #canvas-container {
-	margin: 2px;
-	float: left;
+    margin: 2px;
+    float: left;
 }
 
 #info-container { // with selection hack -ms-user-select:none;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-khtml-user-select: none;
-	padding: 20px;
-	clear: both;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    padding: 20px;
+    clear: both;
 }
 
 #init-controls button {
-	width: 100%;
+    width: 100%;
 }
