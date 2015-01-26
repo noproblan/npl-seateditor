@@ -1,0 +1,25 @@
+{
+  "name": "npl-seateditor",
+  "version": "0.1.0",
+  "homepage": "https://github.com/noproblan/npl-seateditor",
+  "authors": [
+    "Josua Schmid"
+  ],
+  "description": "HTML5 Canvas Seat-Editor for the noprobLAN LAN-Party-Hall.",
+  "keywords": [
+    "seat reservation system",
+    "html5",
+    "canvas"
+  ],
+  "license": "GPLv3",
+  "ignore": [
+    "**/.*",
+    "src",
+    ".gitignore",
+    "bower-template.json"
+  ],
+  "main": "dist/npl-seateditor.js",
+  "dependencies": {
+    "kineticjs": "~5.1.0"
+  }
+}
