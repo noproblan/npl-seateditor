@@ -6,20 +6,19 @@
     "Josua Schmid"
   ],
   "description": "HTML5 Canvas Seat-Editor for the noprobLAN LAN-Party-Hall.",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/noproblan/npl-seateditor.git"
+  },
   "keywords": [
     "seat reservation system",
     "html5",
     "canvas"
   ],
   "license": "GPLv3",
-  "ignore": [
-    "**/.*",
-    "src",
-    ".gitignore",
-    "bower-template.json"
-  ],
-  "main": "dist/npl-seateditor.js",
+  "main": "js/npl-seateditor.js",
   "dependencies": {
+    "jquery": "~1.11.2",
     "kineticjs": "~5.1.0"
   }
 }

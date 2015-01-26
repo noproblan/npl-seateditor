@@ -6,8 +6,9 @@
     <meta name="language" content="de">
     <title>NPL Admin</title>
     <link href="css/seateditor.css" media="screen" rel="stylesheet" type="text/css">
-    <script type="text/javascript" charset="utf-8" src="js/jquery-1.8.0.min.js"></script>
-    <script type="text/javascript" src="js/kinetic-v4.5.5.min.js"></script>
+    
+    <script type="text/javascript" charset="utf-8" src="lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="lib/kineticjs/kinetic.min.js"></script>
     <script type="text/javascript" src="js/seatmap.js"></script>
     
     <script>
@@ -60,7 +61,7 @@ window.onload = function() {
     });
     var deskLayer = new Kinetic.Layer();
     stage.add(deskLayer);
-    stage.setScale(0.34);
+    stage.setScale(1);
 
     /* EVENTS *******************************************************************/
     stage.on("click dragend", function(e) {
