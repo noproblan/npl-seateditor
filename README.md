@@ -11,3 +11,5 @@ Just drag and drop and rotate tables.
 ## Install Dependencies
 
     bower install
+
+This downloads jquery and kineticjs
