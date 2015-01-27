@@ -13,3 +13,7 @@ Just drag and drop and rotate tables.
     bower install
 
 This downloads jquery and kineticjs
+
+## Run Development Server
+
+    python -m SimpleHTTPServer
