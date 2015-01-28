@@ -1,5 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+<!DOCTYPE html>
+<html>
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -7,31 +7,31 @@
     <title>NPL Admin</title>
     <link href="css/seateditor.css" media="screen" rel="stylesheet" type="text/css">
     
-    <script type="text/javascript" charset="utf-8" src="lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="lib/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="lib/kineticjs/kinetic.min.js"></script>
     <script type="text/javascript" src="js/seatmap.js"></script>
     
     <script>
     var selectedDesk = {
-    _desk: null,
-    set: function(desk) {
-        this.onDeselect();
-        this._desk = desk;
-        this.onSelect();
-        this._desk.getParent().draw();
-    },
-    get: function() {
-        return this._desk;
-    },
-    onSelect: function() {
-        this._desk.getChildren()[0].setStroke('red');
-    },
-    onDeselect: function() {
-        if (this._desk) {
-            this._desk.getChildren()[0].setStroke('black');
+        _desk: null,
+        set: function(desk) {
+            this.onDeselect();
+            this._desk = desk;
+            this.onSelect();
+            this._desk.getParent().draw();
+        },
+        get: function() {
+            return this._desk;
+        },
+        onSelect: function() {
+            this._desk.getChildren()[0].setStroke('red');
+        },
+        onDeselect: function() {
+            if (this._desk) {
+                this._desk.getChildren()[0].setStroke('black');
+            }
         }
-    }
-};
+    };
 
 var updatePropertyList = function(desk) {
     document.getElementById('current-index').value = desk.index;
